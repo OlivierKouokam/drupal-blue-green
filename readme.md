@@ -24,49 +24,49 @@ ETAPES
 
 - installation du nfs-server
 
-  + NAMESPACE
+  -- NAMESPACE
 
 kubectl create ns storage
 
-  + DEPLOYMENT
+  -- DEPLOYMENT
 
 kubectl apply -f https://raw.githubusercontent.com/appscode/third-party-tools/master/storage/nfs/artifacts/nfs-server.yaml
 
-  + SERVICE
+  -- SERVICE
 
 kubectl apply -f https://raw.githubusercontent.com/appscode/third-party-tools/master/storage/nfs/artifacts/nfs-service.yaml
 
-  + AJOUT DES DOSSIERS DRUPAL & MYSQL
+  -- AJOUT DES DOSSIERS DRUPAL & MYSQL
 
 kubectl -n storage exec -t -i $(kubectl -n storage get pod -l app=nfs-server -o jsonpath="{.items[0].metadata.name}") -- mkdir /exports/{drupal,mysql}
 
-  + IP DU NFS-SERVICE
+  -- IP DU NFS-SERVICE
 
 kubectl -n storage get service/nfs-service -o jsonpath="{.spec.clusterIP}"
 
 - Déploiement de drupal en version blue
 
-  + NAMESPACE
+  -- NAMESPACE
 
 kubectl create ns drupal
 
-  + MODIFIER LES FICHIERS PV.YAML POUR METTRE LA BONNE ADRESSE DU NFS-SERVICE !!!
+  -- MODIFIER LES FICHIERS PV.YAML POUR METTRE LA BONNE ADRESSE DU NFS-SERVICE !!!
 
-  + CREATION DES RESSOURCES
+  -- CREATION DES RESSOURCES
 
 kubectl -n drupal apply -f .
 
-  + RECUPERER LE NODE_PORT ET JOINDRE LE NAVIGATEUR
+  -- RECUPERER LE NODE_PORT ET JOINDRE LE NAVIGATEUR
 
 kubectl -n drupal get svc
 
 http://<NODE-IP>:<NODE-PORT>
 
--- INSTALLATION DE DRUPAL 9.4 DANS LE NAVIGATEUR
+++ INSTALLATION DE DRUPAL 9.4 DANS LE NAVIGATEUR
 
 	Problème d'écriture dans le dossier drupal !?!
 
--- NOM DU NOEUD >> NFS - ATTRIBUER LES DROITS AU DOSSIER DRUPAL
+++ NOM DU NOEUD >> NFS - ATTRIBUER LES DROITS AU DOSSIER DRUPAL
 
 	vagrant ssh worker
 
@@ -78,21 +78,21 @@ http://<NODE-IP>:<NODE-PORT>
 
 	chmod 777 drupal
 
---REVENIR DANS LE NAVIGATEUR POUR TERMINER LA CONFIG
+++ REVENIR DANS LE NAVIGATEUR POUR TERMINER LA CONFIG
 
 - Déploiement de drupal en version green
 
-  + CREATION DU DEPLOYMENT & TEST
+  -- CREATION DU DEPLOYMENT & TEST
 
 kubectl -n drupal apply -f green/drupal-green-deployment.yaml
 
 "kubectl port-forward" pour s'assurer que la version green fonctionne
 
-  + BASCULEMENT VERS LA VERSION GREEN
+  -- BASCULEMENT VERS LA VERSION GREEN
 
 kubectl -n drupal apply -f green/drupal-service.yaml
 
-  + VERIFIER LES SELECTIONS DU SERVICE
+  -- VERIFIER LES SELECTIONS DU SERVICE
 
 kubectl -n drupal describe svc drupal
 
