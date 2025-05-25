@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drupal-blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drupal
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: drupal
+        version: blue
+    spec:
+      containers:
+      - name: drupal
+        image: drupal:9.4-apache
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        env:
+        - name: MYSQL_HOST
+          value: "mysql"
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_DATABASE
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
+        volumeMounts:
+        - name: drupal-persistent-storage
+          mountPath: /var/www/html/sites/default/files
+      volumes:
+      - name: drupal-persistent-storage
+        persistentVolumeClaim:
+          claimName: drupal-pvc
