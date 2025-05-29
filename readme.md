@@ -1,4 +1,4 @@
-[![image](https://github.com/user-attachments/assets/f79d2bd8-4c5a-4172-9973-952afc8c4231)](https://youtu.be/WV0pS_9pE1M "VIDEO YOUTUBE DRUPAL BLUE-GREEN")
+![image](https://github.com/user-attachments/assets/5e699bfa-2620-43df-ac2d-2f153b5be8be)
 
 # STRATEGIE DE DEPLOYMENT BLUE-GREEN
 
@@ -102,3 +102,5 @@ JOINDRE LE NAVIGATEUR
 http://<NODE-IP>:<NODE-PORT>
 
 CONFIGURER LA VERSION 9.5, LE RESTE C'EST POUR LES ADMINISTRATEURS DRUPAL §§§
+
+[![image](https://github.com/user-attachments/assets/f79d2bd8-4c5a-4172-9973-952afc8c4231)](https://youtu.be/WV0pS_9pE1M "VIDEO YOUTUBE DRUPAL BLUE-GREEN")
