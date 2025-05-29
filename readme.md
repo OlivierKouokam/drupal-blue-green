@@ -1,4 +1,6 @@
-VIDEO: STRATEGIE DE DEPLOYMENT BLUE-GREEN
+[![image](https://github.com/user-attachments/assets/f79d2bd8-4c5a-4172-9973-952afc8c4231)](https://youtu.be/WV0pS_9pE1M "VIDEO YOUTUBE DRUPAL BLUE-GREEN")
+
+# STRATEGIE DE DEPLOYMENT BLUE-GREEN
 
 OUTILS:
 
